@@ -20,8 +20,7 @@
           _BASE = 0,
           _SYMB,  // symbols
           _FUNC,  // func keys
-          _MEDI,  // media keys
-          _NAVI   // navigation keys
+          _MEDI  // media keys
   };
 
   enum CustomKeycodes {
@@ -76,7 +75,6 @@
   #define TD_R_SQ_AL      TD(R_SQRB_ALT)
   #define TD_RST_KYB      TD(RST_KEYB)
   #define TD_ESC_GUI      TD(ESC_GUI)
-  //#define TO_NAVI         MO(_NAVI)
 
   const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
           [_BASE] = LAYOUT(
@@ -87,7 +85,7 @@
                                                                                       KC_Y,      KC_U,     KC_I,     KC_O,     KC_P,    TD_ESC_GUI,  \
                                                                                       KC_H,      KC_J,     KC_K,     KC_L,     KC_SCLN, TD_R_PT_CR,  \
                                                                           KC_MINS,    KC_N,      KC_M,     KC_COMM,  KC_DOT,   KC_SLSH, TD_R_BR_SH,  \
-                                                                          KC_BSPC,    KC_ENT,    TO_SYMB,                      KC_INS,  TD_R_SQ_AL      
+                                                                             KC_BSPC,    KC_ENT,    TO_SYMB,                      KC_INS,  TD_R_SQ_AL
           ),
           [_SYMB] = LAYOUT(
                      KC_TAB,  KC_LBRC,  KC_LCBR,   KC_LPRN,   KC_GRV,  KC_PIPE,            /**/  \
@@ -97,7 +95,7 @@
                                                                                       KC_AMPR,   KC_QUOT,  KC_RPRN,  KC_RCBR,  KC_RBRC, KC_ESC,      \
                                                                                       KC_6,      KC_7,     KC_8,     KC_9,     KC_0,    KC_RCTL,     \
                                                                           KC_NO,      KC_RBRC,   KC_NO,    KC_NO,    KC_NO,    KC_BSLS, KC_RSFT,     \
-                                                                          KC_NO,      KC_NO,     KC_TRNS,                      KC_NO,   KC_ALGR    
+                                                                          KC_NO,      KC_NO,     KC_TRNS,                      KC_NO,   KC_ALGR
           ),
           [_FUNC] = LAYOUT(
                      KC_TAB,    KC_NO,   KC_F10,    KC_F11,   KC_F12,  KC_LGUI,            /**/  \
@@ -107,7 +105,7 @@
                                                                                       KC_APP,    KC_F4,    KC_F5,    KC_F6,    KC_NO,   KC_ESC,      \
                                                                                       KC_HOME,   KC_F1,    KC_F2,    KC_F3,    KC_NO,   KC_RCTL,     \
                                                                           KC_NO,      KC_END,    KC_LEFT,  KC_NO,    KC_RGHT,  KC_NO,   KC_RSFT,     \
-                                                                          KC_LCTL,    KC_LSFT,   KC_LALT,                      KC_NO,   KC_ALGR    
+                                                                          KC_LCTL,    KC_LSFT,   KC_LALT,                      KC_NO,   KC_ALGR
           ),
           [_MEDI] = LAYOUT(
                     KC_TRNS,    KC_NO,    KC_NO,   KC_VOLU,    KC_NO,    KC_NO,            /**/ \
@@ -117,33 +115,24 @@
                                                                                       KC_NO,     KC_NO,    KC_WH_U,  KC_NO,    KC_NO,   TD_RST_KYB, \
                                                                                       KC_NO,     KC_WH_L,  KC_WH_D,  KC_WH_R,  KC_NO,   KC_NO,      \
                                                                           KC_NO,      KC_NO,     KC_NO,    KC_NO,    KC_NO,    KC_NO,   KC_NO,      \
-                                                                          GO_R,       W_RD,      W_RS,                         KC_NO,   KC_MPLY    
+                                                                          GO_R,       W_RD,      W_RS,                         KC_NO,   KC_MPLY
           ),
-          [_NAVI] = LAYOUT(
-                    KC_TAB,     KC_NO,    KC_NO,     KC_NO,    KC_NO,    KC_NO,            /**/ \
-                    KC_LCTL,    KC_NO,    KC_NO,     KC_NO,    KC_NO,    KC_NO,            /**/ \
-                    KC_LSFT,    KC_NO,    KC_NO,     KC_NO,    KC_NO,    KC_NO,    KC_NO,  /**/ \
-                    KC_LALT,    KC_NO,                       KC_LALT,  KC_LSFT,  KC_LCTL,  /**/ \
-                                                                                      KC_PGUP,   KC_HOME,  KC_UP,    KC_END,   KC_NO,   KC_APP,    \
-                                                                                      KC_PGDN,   KC_LEFT,  KC_DOWN,  KC_RGHT,  KC_NO,   KC_RCTL,   \
-                                                                          KC_NO,      KC_NO,     KC_NO,    KC_NO,    KC_NO,    KC_NO,   KC_RSFT,   \
-                                                                          KC_LCTL,    KC_LSFT,   KC_LALT,                      KC_NO,   KC_ALGR
-          )
   };
 
 
   uint8_t ledsRed[8] = {0, 0, 0, 0, 0, 0, 0, 0};
   uint8_t ledsGrn[8] = {0, 0, 0, 0, 0, 0, 0, 0};
   uint8_t ledsBlu[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-  inline void changeLight(uint8_t ledA, uint8_t ledB, uint8_t value){
+
+  static inline void changeLight(uint8_t ledA, uint8_t ledB, uint8_t value){
       ledsRed[ledA] += value;
       ledsGrn[ledA] += value;
-      ledsBlu[ledA] += value; 
-      
+      ledsBlu[ledA] += value;
+
       ledsRed[ledB] += value;
       ledsGrn[ledB] += value;
       ledsBlu[ledB] += value;
-      
+
       rgblight_setrgb_at(ledsRed[ledA], ledsGrn[ledA], ledsBlu[ledA], ledA);
       rgblight_setrgb_at(ledsRed[ledB], ledsGrn[ledB], ledsBlu[ledB], ledB);
   }
@@ -181,10 +170,10 @@
     if (state->count == MODS_TAP_COUNT) {
           register_mods(MOD_BIT(KC_LSFT));
           register_code(KC_9);
-          
+
     } else {
           changeLight(7, 6, 40);
-          
+
           register_mods(MOD_BIT(KC_LCTL));
     }
   }
@@ -193,10 +182,10 @@
       if (state->count == MODS_TAP_COUNT) {
           unregister_code(KC_9);
           unregister_mods(MOD_BIT(KC_LSFT));
-          
+
       } else {
           changeLight(7, 6, -40);
-          
+
           unregister_mods(MOD_BIT(KC_LCTL));
       }
   }
@@ -216,10 +205,10 @@
       if (state->count == MODS_TAP_COUNT) {
           unregister_code(KC_0);
           unregister_mods(MOD_BIT(KC_RSFT));
-          
+
       } else {
           changeLight(0, 1, -40);
-          
+
           unregister_mods(MOD_BIT(KC_RCTL));
       }
   }
@@ -229,10 +218,10 @@
       if (state->count == MODS_TAP_COUNT) {
           register_mods(MOD_BIT(KC_LSFT));
           register_code(KC_LBRC);
-          
+
     } else {
           changeLight(6, 5, 40);
-          
+
           register_mods(MOD_BIT(KC_LSFT));
     }
   }
@@ -241,10 +230,10 @@
       if (state->count == MODS_TAP_COUNT) {
           unregister_code(KC_LBRC);
           unregister_mods(MOD_BIT(KC_LSFT));
-          
+
       } else {
           changeLight(6, 5, -40);
-          
+
           unregister_mods(MOD_BIT(KC_LSFT));
       }
   }
@@ -253,7 +242,7 @@
       if (state->count == MODS_TAP_COUNT) {
           register_mods(MOD_BIT(KC_RSFT));
           register_code(KC_RBRC);
-          
+
     } else {
           changeLight(1, 2, 40);
 
@@ -265,10 +254,10 @@
       if (state->count == MODS_TAP_COUNT) {
           unregister_code(KC_RBRC);
           unregister_mods(MOD_BIT(KC_RSFT));
-          
+
       } else {
           changeLight(1, 2, -40);
-      
+
           unregister_mods(MOD_BIT(KC_RSFT));
       }
   }
@@ -277,7 +266,7 @@
   void dance_l_alt_finished(qk_tap_dance_state_t *state, void *user_data) {
       if (state->count == MODS_TAP_COUNT) {
           register_code(KC_LBRC);
-          
+
     } else {
           changeLight(5, 4, 40);
 
@@ -288,10 +277,10 @@
   void dance_l_alt_reset(qk_tap_dance_state_t *state, void *user_data) {
       if (state->count == MODS_TAP_COUNT) {
           unregister_code(KC_LBRC);
-          
+
       } else {
           changeLight(5, 4, -40);
-          
+
           unregister_mods(MOD_BIT(KC_LALT));
       }
   }
@@ -299,10 +288,10 @@
   void dance_r_alt_finished(qk_tap_dance_state_t *state, void *user_data) {
       if (state->count == MODS_TAP_COUNT) {
           register_code(KC_RBRC);
-          
+
       } else {
           changeLight(2, 3, 40);
-          
+
           register_mods(MOD_BIT(KC_ALGR));
     }
   }
@@ -310,10 +299,10 @@
   void dance_r_alt_reset(qk_tap_dance_state_t *state, void *user_data) {
       if (state->count == MODS_TAP_COUNT) {
           unregister_code(KC_RBRC);
-          
+
       } else {
           changeLight(2, 3, -40);
-          
+
           unregister_mods(MOD_BIT(KC_ALGR));
       }
   }
@@ -353,21 +342,21 @@
         rgblight_setrgb_at(0, 0, 0, ledId);
         ledId++;
       }
-      
+
       while (ledId > 0) {
         ledId--;
-        rgblight_setrgb_at(80, 80, 80, ledId);    
+        rgblight_setrgb_at(80, 80, 80, ledId);
         wait_ms(20);
       }
-      
+
       wait_ms(100);
-        
+
       while (ledId < 8) {
         rgblight_setrgb_at(0, 0, 0, ledId);
         wait_ms(20);
-        ledId++;        
+        ledId++;
       }
-      
+
       reset_keyboard();
     }
   }
@@ -463,8 +452,8 @@
                           SEND_STRING(SS_UP(X_LCTRL));
                   }
                   break;
-                  
-          case LOCK: 
+
+          case LOCK:
                   if (record->event.pressed){
                           SEND_STRING(SS_DOWN(X_LGUI));
                           SEND_STRING(SS_TAP(X_L));
@@ -476,7 +465,7 @@
           return true;
   };
 
-  uint32_t layer_state_set_user(uint32_t state) {
+  layer_state_t layer_state_set_user(layer_state_t state) {
           // icekeys_led_off();
 
           uint8_t layer = biton32(state);
@@ -485,22 +474,22 @@
                   isDefaultLayer = _SYMB;
                   rgblight_setrgb_at(130, 0, 0, 1);
                   break;
-                  
+
           case _FUNC:
                   isDefaultLayer = _FUNC;
                   rgblight_setrgb_at(130, 0, 0, 6);
                   break;
-                  
-          case _MEDI: 
+
+          case _MEDI:
                   isDefaultLayer = _MEDI;
                   rgblight_setrgb_at(130, 255, 130, 0);
                   break;
-                  
+
           case _NAVI:
                   isDefaultLayer = _NAVI;
                   rgblight_setrgb_at(130, 255, 130, 7);
                   break;
-                  
+
           default:
                   isDefaultLayer = _BASE;
                   rgblight_setrgb_at(0, 0, 0, 0);
@@ -516,12 +505,12 @@
   void oneshot_layer_changed_user(uint8_t layerId) {
     if (layerId) {
         uint8_t layer = biton32(layerId);
-        
+
         if (layer == _NAVI) {
             isDefaultLayer = _NAVI;
             rgblight_setrgb_at(130, 255, 130, 7);
         }
-        
+
     } else {
       isDefaultLayer = _BASE;
       rgblight_setrgb_at(0, 0, 0, 0);

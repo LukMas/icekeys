@@ -3,8 +3,6 @@
 A short description of the keyboard/project
 
 Keyboard Maintainer: [You](https://github.com/LukMas)  
-Hardware Supported: The PCBs, controllers supported  
-Hardware Availability: links to where you can find this hardware
 
 Make example for this keyboard (after setting up your build environment):
 
