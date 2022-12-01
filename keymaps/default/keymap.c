@@ -485,11 +485,6 @@
                   rgblight_setrgb_at(130, 255, 130, 0);
                   break;
 
-          case _NAVI:
-                  isDefaultLayer = _NAVI;
-                  rgblight_setrgb_at(130, 255, 130, 7);
-                  break;
-
           default:
                   isDefaultLayer = _BASE;
                   rgblight_setrgb_at(0, 0, 0, 0);
@@ -500,23 +495,5 @@
           }
 
           return state;
-  }
-
-  void oneshot_layer_changed_user(uint8_t layerId) {
-    if (layerId) {
-        uint8_t layer = biton32(layerId);
-
-        if (layer == _NAVI) {
-            isDefaultLayer = _NAVI;
-            rgblight_setrgb_at(130, 255, 130, 7);
-        }
-
-    } else {
-      isDefaultLayer = _BASE;
-      rgblight_setrgb_at(0, 0, 0, 0);
-      rgblight_setrgb_at(0, 0, 0, 1);
-      rgblight_setrgb_at(0, 0, 0, 6);
-      rgblight_setrgb_at(0, 0, 0, 7);
-    }
   }
 
